@@ -6,7 +6,7 @@ public class BOJ_4673 { // 셀프 넘버
 
         for (int i = 0; i < nums.length; i++) {
             if (d(i + 1) < index + 1)
-                nums[d(i + 1) - 1] = true; // 셀프 넘버가 아니면 true를 대입
+                nums[d(i + 1) - 1] = true; // 셀프 넘버가 아니면 true를 대입한다.
         }
         for (int i = 0; i < nums.length; i++) {
             if (nums[i] == false)
