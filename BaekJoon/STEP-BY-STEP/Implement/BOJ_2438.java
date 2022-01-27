@@ -6,6 +6,7 @@ public class BOJ_2438 {
     public static void main(String[] args) throws IOException {
         BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
         int a = Integer.parseInt(bf.readLine());
+        
         bf.close();
 
         for (int i = 1; i <= a; i++) {
