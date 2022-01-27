@@ -1,4 +1,5 @@
 import java.util.Scanner;
+
 public class BOJ_1000 {
 	
 	public static void main(String[] args) {
