@@ -22,7 +22,6 @@ public class BOJ_4673 { // 셀프 넘버
         for (int i = 0; i < str.length(); i++) {
             n += Integer.parseInt(str.substring(i, i + 1));
         }
-
         return n;
     }
 }
