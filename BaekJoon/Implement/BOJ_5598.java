@@ -29,7 +29,7 @@ public class BOJ_5598 {
             }
         }
 
-        bw.write(decode + "\n"); // 결과 출력
+        bw.write(decode + "\n"); 
         bw.flush();
     }
 }
