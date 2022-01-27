@@ -1,5 +1,6 @@
 import java.util.Scanner; //A+B 입력 받은 횟수만큼 두 상수를 더해서 출력
 
+
 public class BOJ_10950 {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
