@@ -1,35 +1,35 @@
+import java.util.*;
 import java.io.*;
+
+/**
+ * 각 문자가 연속해서 나타나는 경우
+ * ccazzzzbb c a z b k i n
+ */
 public class Main {
-    static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-    
-    public static void main(String[] args) throws Exception {
-        int N = Integer.parseInt(br.readLine());
-        int count = 0;
-        for (int i = 0; i < N; i++) {
-            if (checkGroup()) {
-                count++;
-            }
-        }
-        System.out.println(count);
-    }
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        int n = Integer.parseInt(br.readLine());
+        int answer = n;
+        for (int i = 0; i < n; i++) {
+            String s = br.readLine();
+            HashMap<Character, Integer> hm = new HashMap<>();
 
-    private static boolean checkGroup() throws Exception {
-        boolean[] word = new boolean[26];
-        int previous = 0;
-        String sentence = br.readLine();
-
-        for (int j = 0; j < sentence.length(); j++) {
-            int now = sentence.charAt(j);
-
-            if (now != previous) {
-                if (!word[now - 'a']) {
-                    word[now - 'a'] = true;
-                    previous = now;
+            for (int j = 0; j < s.length(); j++) {
+                char c = s.charAt(j);
+                //해시맵에 담는 과정
+                //처음 등장하는 경우
+                if (!hm.containsKey(c)) {
+                    hm.put(c, j);
                 } else {
-                    return false;
+                    if (hm.get(c) + 1 == j) {
+                        hm.put(c, j);
+                    } else {
+                        answer--;
+                        break;
+                    }
                 }
             }
         }
-        return true;
+        System.out.println(answer);
     }
 }
