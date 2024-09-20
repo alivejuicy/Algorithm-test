@@ -1,35 +1,51 @@
-import java.util.*;
 import java.io.*;
-class Main{
-    static int n, m; //컴퓨터 개수, 연결 쌍 개수
-    static int[][] map; // 네트워크 상 연결된 컴퓨터 좌표 2차원 배열
-    static boolean[] visit; //방문한 컴퓨터 체크하기 위한 1차원 배열
-    static int cnt = 0;
+import java.util.*;
 
+public class Main {
+    static int n, m;
+    static int[][] mat;
+    static boolean[] visited;
+    static Queue<Integer> que = new ArrayDeque<>();
+    static int ans;
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        StringTokenizer st;
-        n = Integer.parseInt(br.readLine());
-        m = Integer.parseInt(br.readLine());
-        map = new int[n + 1][n + 1]; // n+1 x n+1 초기화 -> 시작점을 1로 시작했으니 n+1로 초기화한다.
-        visit = new boolean[n + 1]; // 1번부터 n번 컴퓨터의 방문 여부를 담기위한 배열 초기화
-
-        for (int i = 1; i <= m; i++) {
-            st = new StringTokenizer(br.readLine(), " ");
-            int a = Integer.parseInt(st.nextToken());
-            int b = Integer.parseInt(st.nextToken());
-            map[a][b] = map[b][a] = 1; //바이러스 컴퓨터 쌍의 번호를 인덱스로 해서 1 할당하기
+        n = Integer.parseInt(br.readLine());//컴퓨터 수
+        m = Integer.parseInt(br.readLine());//컴퓨터의 쌍 개수
+        mat = new int[n + 1][n + 1];
+        visited = new boolean[n + 1];
+        for (int i = 0; i < m; i++) {
+            StringTokenizer st = new StringTokenizer(br.readLine());
+            int x = Integer.parseInt(st.nextToken());
+            int y = Integer.parseInt(st.nextToken());
+            mat[x][y] = mat[y][x] = 1; // 컴퓨터 쌍 좌표에 1이란 숫자로 연결 표시한다.
         }
-        dfs(1); //1번 컴퓨터부터 dfs 돌기
-        System.out.println(cnt - 1); //1번 컴퓨터 빼주기
+        que.offer(1); // 시작점 미리 넣어주고
+        visited[1] = true;
+        ans = 0;
+        Bfs();
+        //Dfs(1);
+        System.out.println(ans);
     }
 
-    public static void dfs(int start) {
-        visit[start] = true; //1번부터 방문처리 해주고
-        cnt++; // 카운트 올리기 
-        for (int i = 1; i <= n; i++) { 
-            if (map[start][i] == 1 && !visit[i]) {
-                dfs(i);
+    public static void Bfs() {
+        while (!que.isEmpty()) {
+            int num = que.poll();
+            for(int i=1; i<=n; i++){
+                if(mat[num][i] == 1 && !visited[i]){
+                    que.offer(i);
+                    visited[i] = true;
+                    ans++;
+                }
+            }
+        }
+    }
+
+    private static void Dfs(int depth){
+        visited[depth] = true;
+        for(int i=1; i<= n; i++){
+            if(mat[depth][i] == 1 && !visited[i]){
+                ans++;
+                Dfs(i);
             }
         }
     }
